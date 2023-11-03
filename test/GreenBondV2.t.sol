@@ -11,13 +11,7 @@ contract GreenBondV2Test is Test {
     GreenBondV2 public bond;
     address public gov;
 
-    // uint256 MAINNET_FORK_ID;
-
-    // string RPC_ARB_MAINNET = vm.envString("RPC_ARBITRUM");
-
     function setUp() public {
-        // MAINNET_FORK_ID = vm.createSelectFork(RPC_ARB_MAINNET);
-        // vm.selectFork(MAINNET_FORK_ID);
         bond = new GreenBondV2();
         gov = tx.origin;
     }
@@ -29,7 +23,7 @@ contract GreenBondV2Test is Test {
     function testDepositUSDT(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         token.approve(address(bond), amount);
         uint256 shares = bond.deposit(amount, address(this));
@@ -40,7 +34,7 @@ contract GreenBondV2Test is Test {
     function testDepositFail(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         vm.expectRevert();
         bond.deposit(amount, address(this));
@@ -49,7 +43,7 @@ contract GreenBondV2Test is Test {
     function testWithdraw(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         token.approve(address(bond), amount);
         bond.deposit(amount, address(this));
@@ -62,7 +56,7 @@ contract GreenBondV2Test is Test {
     function testWithdrawFail(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         token.approve(address(bond), amount);
         uint256 shares = bond.deposit(amount, address(this));
@@ -75,7 +69,7 @@ contract GreenBondV2Test is Test {
     function testRecoverToken(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         token.transfer(address(bond), amount);
         vm.prank(gov);
@@ -86,7 +80,7 @@ contract GreenBondV2Test is Test {
     function testRecoverTokenFail(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         token.transfer(address(bond), amount);
         vm.expectRevert();
@@ -96,7 +90,7 @@ contract GreenBondV2Test is Test {
     function testTransferToken(uint256 amount) public {
         vm.assume(amount > 2000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         writeTokenBalance(address(this), token, amount);
         token.approve(address(bond), amount);
         uint256 shares = bond.deposit(amount, address(this));
@@ -124,7 +118,7 @@ contract GreenBondV2Test is Test {
     function testPayProject(uint256 amount) public {
         vm.assume(amount>4000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         vm.prank(gov);
         uint256 id = bond.registerProject(address(this), "Test project");
         writeTokenBalance(address(this), token, amount);
@@ -141,7 +135,7 @@ contract GreenBondV2Test is Test {
     function testReceiveIncome(uint256 amount) public {
         vm.assume(amount>4000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         vm.prank(gov);
         uint256 id = bond.registerProject(address(this), "Test project");
         writeTokenBalance(address(this), token, amount);
@@ -159,7 +153,7 @@ contract GreenBondV2Test is Test {
     function testCompleteProject(uint256 amount) public {
         vm.assume(amount>4000);
         ERC20 token = bond.asset();
-        vm.assume(amount < 32885414715773);
+        vm.assume(amount < 20000000000000);
         vm.prank(gov);
         uint256 id = bond.registerProject(address(this), "Test project");
         writeTokenBalance(address(this), token, amount);

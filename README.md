@@ -29,6 +29,9 @@ Green energy projects are registered for asset deployment. Master contract agree
 
 By combining the features of the GreenBond and project finance agreements, investors can earn rewards for providing liquidity, while the contract benefits from a flexible payment processing solution that supports income receipt, supplier payments, and contract completion.
 
+## Tests
+
+[ERC4626 and project tests](docs/test-results.md)
 
 ## Built with Foundry
 
@@ -56,7 +59,7 @@ $ forge build
 ### Test
 
 ```shell
-$ forge test
+$ forge test --fork-url https://arb1.arbitrum.io/rpc -vvv
 ```
 
 ### Format
