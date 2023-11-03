@@ -3,4 +3,13 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
+[fmt]
+line_length = 160
+bracket_spacing = true
+
+
+[etherscan]
+arbitrum = { key = "${ARBISCAN_API}" }
+
+
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

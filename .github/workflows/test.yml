@@ -1,6 +1,12 @@
 name: test
 
-on: workflow_dispatch
+on: 
+  push:
+    paths:
+    - 'src/**/*.sol'
+    - 'test/**/*.sol'
+    - '.github/workflows/*.yaml'
+    - '.github/workflows/*.yml'
 
 env:
   FOUNDRY_PROFILE: ci
@@ -30,5 +36,5 @@ jobs:
 
       - name: Run Forge tests
         run: |
-          forge test -vvv
+          forge test --fork-url https://arb1.arbitrum.io/rpc -vvv
         id: test
