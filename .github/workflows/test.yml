@@ -10,6 +10,7 @@ on:
 
 env:
   FOUNDRY_PROFILE: ci
+  ARBISCAN_API: ${{ secrets.ARBISCAN_API }}
 
 jobs:
   check:

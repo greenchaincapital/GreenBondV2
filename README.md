@@ -1,4 +1,4 @@
-# Gren Bond V2 ![Foundry](https://github.com/greenchaincapital/GreenBondV2/actions/workflows/test.yml/badge.svg?branch=main)
+# Green Bond V2 ![Foundry](https://github.com/greenchaincapital/GreenBondV2/actions/workflows/test.yml/badge.svg?branch=main)
 
 ### Green Bond Contract on Arbitrum ([ERC4626 compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/))
 
@@ -11,7 +11,7 @@ GreenBond V2 contract builds upon [GreenBond](https://github.com/greenchaincapit
     - Better rate of return (currently ~10% APR for Aave as opposed to ~6% for Curve)
     - Automatic rewards as opposed to claiming processes
 
-Overrall design to provide stable returns for renewable energy project financing, in the form of a stablecoin (USDT) bond. It enforces a minimum lock-up period (3-6months) for deposited assets, in order to establish new projects' active income. Passive income is earned through Aave lending.
+Overrall design to provide stable returns for renewable energy project financing, in the form of a stablecoin (USDT) bond. It enforces a minimum lock-up period (3-6 months) for deposited assets, in order to establish new projects' active income. Passive income is earned through Aave lending.
 
 Green energy projects are registered for asset deployment. Master contract agreements are publically linked for transparency and accountability of operations. Income is received from these projects to pay dividends to investors. 
 
