@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT License
 pragma solidity ^0.8.19;
 
-import {IL2Pool} from "./interfaces/IL2Pool.sol";
-import {IL2Encoder} from "./interfaces/IL2Encoder.sol";
-import {ERC20} from "solmate/tokens/ERC20.sol";
-import {ERC4626} from "solmate/mixins/ERC4626.sol";
-import {SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
+import { IL2Pool } from "./interfaces/IL2Pool.sol";
+import { IL2Encoder } from "./interfaces/IL2Encoder.sol";
+import { ERC20 } from "solmate/tokens/ERC20.sol";
+import { ERC4626 } from "solmate/mixins/ERC4626.sol";
+import { SafeTransferLib } from "solmate/utils/SafeTransferLib.sol";
 
 /// @title GreenBondV2
 /// @notice ERC4626 Vault on Arbitrum, wth USDT as asset and Aave as passive income lockup.
@@ -34,14 +34,14 @@ contract GreenBondV2 is ERC4626 {
 
     /// @notice Deposit lockup time, default 3 months
     uint64 public LOCKUP = 3 * 30 days;
-    /// @notice Governance address
-    address public GOV;
     /// @notice Transient tokens deployed to project (~ 6 months lock-up)
     uint256 public DEPLOYED_ASSETS;
     /// @notice Total assets deployed to projects
     uint256 public TOTAL_DEPLOYED_ASSETS;
     /// @notice Total assets paid by projects
     uint256 public TOTAL_REPAID_ASSETS;
+    /// @notice Governance addresses
+    mapping(address => bool) public GOV;
     /// @notice Time weighted average lockup time per address
     mapping(address => uint256) public depositTimestamps;
     // internal global variables
@@ -56,7 +56,7 @@ contract GreenBondV2 is ERC4626 {
     constructor() ERC4626(ASSET, "GreenBondV2", "gBOND2") {
         // approve Aave pool max spend of USDT from this address to save gas on supply calls
         ASSET.approve(address(POOL), type(uint256).max);
-        GOV = tx.origin; // CREATE2 deployment requires tx.origin
+        GOV[tx.origin] = true; // CREATE2 deployment requires tx.origin
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ contract GreenBondV2 is ERC4626 {
     //////////////////////////////////////////////////////////////*/
 
     function _govCheck() internal view {
-        if (msg.sender != GOV) revert Unauthorized();
+        if (!GOV[msg.sender]) revert Unauthorized();
     }
 
     function changeLockup(uint64 newLockup) external {
@@ -72,9 +72,17 @@ contract GreenBondV2 is ERC4626 {
         LOCKUP = newLockup;
     }
 
-    function changeGov(address newGov) external {
+    function addGov(address newGov) external {
         _govCheck();
-        GOV = newGov;
+        GOV[newGov] = true;
+        emit GovernorAdded(newGov);
+    }
+
+    function removeGov(address oldGov) external {
+        _govCheck();
+        if (msg.sender == oldGov) revert Unauthorized();
+        GOV[oldGov] = false;
+        emit GovernorRemoved(oldGov);
     }
 
     function recoverToken(address token, address receiver, uint256 tokenAmount) external {
@@ -104,7 +112,7 @@ contract GreenBondV2 is ERC4626 {
         project.admin = projectAdmin;
         project.projectName = projectName;
 
-        unchecked{
+        unchecked {
             ++projectCount;
         }
 
@@ -136,7 +144,7 @@ contract GreenBondV2 is ERC4626 {
         }
         projects[projectId].totalAssetsSupplied += uint128(assets);
 
-        beforeWithdraw(assets,0);
+        beforeWithdraw(assets, 0);
 
         unchecked {
             DEPLOYED_ASSETS += assets;
@@ -169,49 +177,41 @@ contract GreenBondV2 is ERC4626 {
                             PUBLIC FUNCTIONS
     //////////////////////////////////////////////////////////////*/
 
-    function totalAssets() public view override virtual returns (uint256) {
+    function totalAssets() public view virtual override returns (uint256) {
         // Aave asset has a 1:1 ratio with underlying asset
         // Fetch latest balance of principal + interest from Aave
         return AAVE_ASSET.balanceOf(address(this)) + DEPLOYED_ASSETS;
     }
 
-    function deposit(uint256 assets, address receiver) public override virtual returns (uint256 shares) {
+    function deposit(uint256 assets, address receiver) public virtual override returns (uint256 shares) {
         // Set the deposit timestamp for the user
         _updateDepositTimestamp(receiver, convertToShares(assets));
         shares = super.deposit(assets, receiver);
     }
 
-    function mint(uint256 shares, address receiver) public override virtual returns (uint256 assets) {
+    function mint(uint256 shares, address receiver) public virtual override returns (uint256 assets) {
         // Set the deposit timestamp for the user
         _updateDepositTimestamp(receiver, shares);
         assets = super.mint(shares, receiver);
     }
 
-    function withdraw(
-        uint256 assets,
-        address receiver,
-        address owner
-    ) public override virtual returns (uint256 shares) {
+    function withdraw(uint256 assets, address receiver, address owner) public virtual override returns (uint256 shares) {
         if (block.timestamp < depositTimestamps[owner] + LOCKUP) revert InsufficientLockupTime();
         shares = super.withdraw(assets, receiver, owner);
     }
 
-    function redeem(
-        uint256 shares,
-        address receiver,
-        address owner
-    ) public override virtual returns (uint256 assets) {
+    function redeem(uint256 shares, address receiver, address owner) public virtual override returns (uint256 assets) {
         if (block.timestamp < depositTimestamps[owner] + LOCKUP) revert InsufficientLockupTime();
         assets = super.redeem(shares, receiver, owner);
     }
 
-    function transfer(address to, uint256 amount) public override virtual returns (bool success) {
+    function transfer(address to, uint256 amount) public virtual override returns (bool success) {
         _updateDepositTimestamp(to, amount);
         success = super.transfer(to, amount);
         _updateTransferTimestamp(msg.sender, amount);
     }
 
-    function transferFrom(address from, address to, uint256 amount) public override virtual returns (bool success) {
+    function transferFrom(address from, address to, uint256 amount) public virtual override returns (bool success) {
         _updateDepositTimestamp(to, amount);
         success = super.transferFrom(from, to, amount);
         _updateTransferTimestamp(from, amount);
@@ -221,14 +221,14 @@ contract GreenBondV2 is ERC4626 {
                             INTERNAL FUNCTIONS
     //////////////////////////////////////////////////////////////*/
 
-    function beforeWithdraw(uint256 assets, uint256) internal override virtual {
+    function beforeWithdraw(uint256 assets, uint256) internal virtual override {
         if (AAVE_ASSET.balanceOf(address(this)) < assets) revert InsufficientLiquidity();
         // Withdraw underlying asset from Aave
         bytes32 args = ENCODER.encodeWithdrawParams(address(ASSET), assets);
         POOL.withdraw(args);
     }
 
-    function afterDeposit(uint256 assets, uint256) internal override virtual {
+    function afterDeposit(uint256 assets, uint256) internal virtual override {
         // Deposit underlying asset to Aave
         bytes32 args = ENCODER.encodeSupplyParams(address(ASSET), assets, 0);
         POOL.supply(args);
@@ -257,7 +257,7 @@ contract GreenBondV2 is ERC4626 {
         } else {
             // multiple deposits, so weight timestamp by amounts
             unchecked {
-                depositTimestamps[account] = lastDeposit - lastDeposit * shares / (newBalance + shares);
+                depositTimestamps[account] = lastDeposit - (block.timestamp - lastDeposit) * shares / (newBalance + shares);
             }
         }
     }
@@ -266,6 +266,8 @@ contract GreenBondV2 is ERC4626 {
                                  EVENTS
     //////////////////////////////////////////////////////////////*/
 
+    event GovernorAdded(address newGov);
+    event GovernorRemoved(address oldGov);
     event PaidProject(address admin, uint256 amount, uint256 projectId);
     event ReceivedIncome(address indexed sender, uint256 assets, uint256 projectId);
     event ProjectRegistered(uint256 indexed project);
@@ -286,6 +288,5 @@ contract GreenBondV2 is ERC4626 {
     error IdenticalAddresses();
     error InsufficientLockupTime();
     error Unauthorized();
-    error NoRewardsToClaim();
     error NotProject();
 }
