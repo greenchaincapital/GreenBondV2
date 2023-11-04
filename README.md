@@ -2,6 +2,8 @@
 
 ### Green Bond Contract on Arbitrum ([ERC4626 compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/))
 
+### Deployed at [0xD24644Ca8cB5D67E776291b37896Bc3D557A47B8](https://arbiscan.io/address/0xd24644ca8cb5d67e776291b37896bc3d557a47b8)
+
 ## GreenBond V2 Summary
 
 GreenBond V2 contract builds upon [GreenBond](https://github.com/greenchaincapital/GreenBond) with the following features:
