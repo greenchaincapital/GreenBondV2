@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - GreenBond Docs</title>
+        <title>XStructure - GreenBond Docs</title>
 
 
         <!-- Custom HTML head -->
@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html" class="active">Home</a></li><li class="chapter-item "><a href="PROJECT_FINANCE.html">Project Finance</a></li><li class="chapter-item "><a href="XSTRUCTURE.html">XStructure</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li><li class="chapter-item "><a href="src/interfaces/IL2Pool.sol/interface.IL2Pool.html">IL2Pool</a></li></ol></li><li class="chapter-item "><a href="src/GreenBondV2.sol/contract.GreenBondV2.html">GreenBondV2</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item "><a href="PROJECT_FINANCE.html">Project Finance</a></li><li class="chapter-item expanded "><a href="XSTRUCTURE.html" class="active">XStructure</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li><li class="chapter-item "><a href="src/interfaces/IL2Pool.sol/interface.IL2Pool.html">IL2Pool</a></li></ol></li><li class="chapter-item "><a href="src/GreenBondV2.sol/contract.GreenBondV2.html">GreenBondV2</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -175,54 +175,89 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="green-bond-v2"><a class="header" href="#green-bond-v2">Green Bond V2 <img src="https://github.com/greenchaincapital/GreenBondV2/actions/workflows/test.yml/badge.svg?branch=main" alt="Foundry" /></a></h1>
-<h3 id="green-bond-contract-on-arbitrum-erc4626-compatible"><a class="header" href="#green-bond-contract-on-arbitrum-erc4626-compatible">Green Bond Contract on Arbitrum (<a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/">ERC4626 compatible</a>)</a></h3>
-<h3 id="deployed-at-0xd24644ca8cb5d67e776291b37896bc3d557a47b8"><a class="header" href="#deployed-at-0xd24644ca8cb5d67e776291b37896bc3d557a47b8">Deployed at <a href="https://arbiscan.io/address/0xd24644ca8cb5d67e776291b37896bc3d557a47b8">0xD24644Ca8cB5D67E776291b37896Bc3D557A47B8</a></a></h3>
-<h2 id="greenbond-v2-summary"><a class="header" href="#greenbond-v2-summary">GreenBond V2 Summary</a></h2>
-<p>GreenBond V2 contract builds upon <a href="https://github.com/greenchaincapital/GreenBond">GreenBond</a> with the following features:</p>
-<ul>
-<li>Fully ERC4626 compatible</li>
-<li>Aave passive income instead of Curve
-<ul>
-<li>Simplified interfacing (more robust and secure)</li>
-<li>Better rate of return (currently ~10% APR for Aave as opposed to ~6% for Curve)</li>
-<li>Automatic rewards as opposed to claiming processes</li>
-</ul>
-</li>
-</ul>
-<p>Overrall design to provide stable returns for renewable energy project financing, in the form of a stablecoin (USDT) bond. It enforces a minimum lock-up period (3-6 months) for deposited assets, in order to establish new projects' active income. Passive income is earned through Aave lending.</p>
-<p>Green energy projects are registered for asset deployment. Master contract agreements are publically linked for transparency and accountability of operations. Income is received from these projects to pay dividends to investors. </p>
-<h3 id="interaction-between-greenbond-and-projects"><a class="header" href="#interaction-between-greenbond-and-projects">Interaction Between GreenBond and Projects:</a></h3>
+                        <h1 id="xstructure---project-finance-operator-workflow"><a class="header" href="#xstructure---project-finance-operator-workflow">Xstructure - Project Finance Operator Workflow</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Xstructure is responsible for managing and operating the <code>GreenBondV2</code> contract, which serves as an ERC4626 Vault on Arbitrum for the GreenBond project. This technical workflow outlines the key roles and operations that Xstructure performs as a project finance operator for the GreenBond DeFi platform.</p>
+<h2 id="key-roles-and-operations"><a class="header" href="#key-roles-and-operations">Key Roles and Operations</a></h2>
+<h3 id="1-initial-setup"><a class="header" href="#1-initial-setup">1. Initial Setup</a></h3>
+<p>Xstructure's role as a project finance operator begins with the initial setup of the <code>GreenBondV2</code> contract. This setup involves deploying the contract and configuring various parameters, such as the lockup period, asset addresses, Aave pool, and encoder.</p>
+<h3 id="2-governance"><a class="header" href="#2-governance">2. Governance</a></h3>
+<p>As a project finance operator, Xstructure has governance control over the contract. This control includes the ability to make critical decisions and changes. Key governance-related operations include:</p>
 <ul>
 <li>
-<p>Reward Accumulation: Users deposit stablecoins (USDT) into the GreenBond contract to earn rewards over time. These rewards are automatically accumulated, based on both passive income from Aave lending and active income from active projects.</p>
+<p><strong>Changing Lockup Period</strong>: Xstructure can modify the lockup period as needed to align with project requirements.</p>
 </li>
 <li>
-<p>Income Receipt: The Projects generate income for the investors either in a fixed payment agreement or through re-sale of the project.</p>
+<p><strong>Adding and Removing Governance Addresses</strong>: Xstructure can add or remove addresses from the governance list to grant or revoke control over contract parameters.</p>
 </li>
 <li>
-<p>Supplier Payment: The GreenBond contract, under governance control, can pay the registered project admin. Governance initiates the payment by calling the payProject function, specifying the project details.</p>
-</li>
-<li>
-<p>Activation and Completion: Each project can be activated by governance, marking the start of the payment process. Once the term of the agreement is over, the company can complete the project by calling the completeProject function.</p>
-</li>
-<li>
-<p>Governance Control: The GreenBond contract is under governance control, allowing designated addresses to manage contract parameters, such as the fixed interest rate, lock-up period, and governance address.</p>
+<p><strong>Recovering Tokens</strong>: In cases where token recovery is necessary, Xstructure can initiate the transfer of tokens from the contract to a designated receiver.</p>
 </li>
 </ul>
-<p>By combining the features of the GreenBond and project finance agreements, investors can earn rewards for providing liquidity, while the contract benefits from a flexible payment processing solution that supports income receipt, project payments, and project completion.</p>
-<h2 id="project-finance-operations"><a class="header" href="#project-finance-operations">Project Finance Operations</a></h2>
+<h3 id="3-project-management"><a class="header" href="#3-project-management">3. Project Management</a></h3>
+<p>Xstructure plays a pivotal role in managing and supervising projects that interact with the GreenBond platform. Project management operations include:</p>
 <ul>
-<li><a href="PROJECT_FINANCE.html">Project Finance</a></li>
-<li><a href="XSTRUCTURE.html">XStructure</a></li>
+<li>
+<p><strong>Registering Projects</strong>: Xstructure can register new projects by specifying project administrators and project names. This step initiates the project's interaction with the GreenBond platform.</p>
+</li>
+<li>
+<p><strong>Linking Project Agreements</strong>: Xstructure can link project agreements by associating project IDs with master agreements. This ensures that project-related agreements are stored securely on the blockchain.</p>
+</li>
+<li>
+<p><strong>Completing Projects</strong>: When a project has successfully repaid its deployed assets, Xstructure can mark the project as completed.</p>
+</li>
+<li>
+<p><strong>Paying Projects</strong>: Xstructure has the authority to pay projects by transferring assets to the project administrators. This action activates the project and increases the total assets supplied to that project.</p>
+</li>
+<li>
+<p><strong>Receiving Income</strong>: Xstructure handles the reception of income from projects. Income received is then distributed to the project's address, effectively repaying the assets.</p>
+</li>
 </ul>
+<h3 id="4-master-agreement-preparation"><a class="header" href="#4-master-agreement-preparation">4. Master Agreement Preparation</a></h3>
+<p>One of Xstructure's critical responsibilities as a project finance operator is to facilitate the creation and preparation of the master agreement for each project. The master agreement serves as a binding contract that formalizes the relationship between the project, the GreenBond platform, and the bondholders. It establishes the terms and conditions under which the project's assets and revenue rights are tied to the bond. Here's an overview of the master agreement preparation process:</p>
+<ul>
+<li>
+<p><strong>Project-Specific Terms</strong>: Xstructure collaborates with the project administrators to define project-specific terms within the master agreement. These terms may include the duration of the project, the asset lockup period, revenue-sharing arrangements, and any special conditions that pertain to the project.</p>
+</li>
+<li>
+<p><strong>Legal Compliance</strong>: Xstructure ensures that the master agreement complies with all relevant legal and regulatory requirements. This may involve consulting with legal experts to draft or review the agreement to ensure it adheres to local and international laws.</p>
+</li>
+<li>
+<p><strong>Asset Lockup Period</strong>: The master agreement explicitly outlines the asset lockup period, which may range from 3 to 6 months. During this period, the project's assets are locked, and revenue is accrued, further securing bondholders' investments.</p>
+</li>
+<li>
+<p><strong>Revenue Distribution</strong>: The master agreement defines how revenue generated by the project is distributed. This may include specifying the percentage of revenue allocated to bondholders, project expenses, and the project's administrators.</p>
+</li>
+<li>
+<p><strong>Rights and Obligations</strong>: The agreement outlines the rights and obligations of all parties involved, including the project administrators, GreenBond platform, and bondholders. It clearly defines the responsibilities and expectations of each party.</p>
+</li>
+<li>
+<p><strong>Performance Metrics</strong>: To ensure transparency and accountability, the master agreement may include performance metrics and reporting requirements. These metrics are used to track the project's progress and assess its financial health.</p>
+</li>
+<li>
+<p><strong>Dispute Resolution</strong>: In the event of disputes or disagreements, the master agreement outlines a clear dispute resolution process. This process helps in resolving issues and maintaining the integrity of the bond.</p>
+</li>
+<li>
+<p><strong>Amendments and Updates</strong>: The agreement may specify the process for making amendments or updates to the terms and conditions. This ensures that the agreement can adapt to changing circumstances or project developments.</p>
+</li>
+<li>
+<p><strong>Signing and Execution</strong>: Once the master agreement is drafted, it is reviewed and signed by all relevant parties, including project administrators, bondholders, and the GreenBond platform. The agreement becomes legally binding upon execution.</p>
+</li>
+</ul>
+<p>By meticulously preparing the master agreement, Xstructure helps establish a secure and transparent framework that ties the project's assets and revenue rights to the bond. This agreement ensures that all parties involved are aware of their rights and responsibilities, ultimately fostering trust and confidence in the GreenBond platform and its mission to support renewable energy initiatives.</p>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>Xstructure plays a critical role in managing and operating the <code>GreenBondV2</code> contract as a project finance operator. Their responsibilities include governance, project management, and asset management, all of which are vital for the success and sustainability of the GreenBond DeFi platform. Through these operations, Xstructure contributes to the growth and stability of the DeFi green bond project, furthering its mission to support renewable energy initiatives.</p>
+<p><em>Disclaimer: The technical workflow presented here is a high-level overview of Xstructure's role and operations as a project finance operator for the GreenBond project. Actual workflows may vary depending on specific project requirements and contractual agreements.</em></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="PROJECT_FINANCE.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="PROJECT_FINANCE.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="src/interfaces/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -232,8 +267,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="PROJECT_FINANCE.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="PROJECT_FINANCE.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="src/interfaces/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

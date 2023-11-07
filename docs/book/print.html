@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>GreenBond Docs</title>
         <meta name="robots" content="noindex">
 
 
@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li><li class="chapter-item "><a href="src/interfaces/IL2Pool.sol/interface.IL2Pool.html">IL2Pool</a></li></ol></li><li class="chapter-item "><a href="src/GreenBondV2.sol/contract.GreenBondV2.html">GreenBondV2</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item "><a href="PROJECT_FINANCE.html">Project Finance</a></li><li class="chapter-item "><a href="XSTRUCTURE.html">XStructure</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li><li class="chapter-item "><a href="src/interfaces/IL2Pool.sol/interface.IL2Pool.html">IL2Pool</a></li></ol></li><li class="chapter-item "><a href="src/GreenBondV2.sol/contract.GreenBondV2.html">GreenBondV2</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,7 +141,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title"></h1>
+                    <h1 class="menu-title">GreenBond Docs</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -196,13 +196,13 @@
 <h3 id="interaction-between-greenbond-and-projects"><a class="header" href="#interaction-between-greenbond-and-projects">Interaction Between GreenBond and Projects:</a></h3>
 <ul>
 <li>
-<p>Reward Accumulation: Users deposit stablecoins or LP tokens into the GreenBond contract to earn rewards over time. These rewards are calculated based on the fixed annual interest rate and the amount of time the assets are locked. Users can claim and compound their rewards.</p>
+<p>Reward Accumulation: Users deposit stablecoins (USDT) into the GreenBond contract to earn rewards over time. These rewards are automatically accumulated, based on both passive income from Aave lending and active income from active projects.</p>
 </li>
 <li>
-<p>Income Receipt: The Projects generate income for the investors.</p>
+<p>Income Receipt: The Projects generate income for the investors either in a fixed payment agreement or through re-sale of the project.</p>
 </li>
 <li>
-<p>Supplier Payment: The GreenBond contract, under governance control, can pay suppliers of the company. Governance initiates the payment by calling the paySuppliers function, specifying the project details.</p>
+<p>Supplier Payment: The GreenBond contract, under governance control, can pay the registered project admin. Governance initiates the payment by calling the payProject function, specifying the project details.</p>
 </li>
 <li>
 <p>Activation and Completion: Each project can be activated by governance, marking the start of the payment process. Once the term of the agreement is over, the company can complete the project by calling the completeProject function.</p>
@@ -211,47 +211,148 @@
 <p>Governance Control: The GreenBond contract is under governance control, allowing designated addresses to manage contract parameters, such as the fixed interest rate, lock-up period, and governance address.</p>
 </li>
 </ul>
-<p>By combining the features of the GreenBond and project finance agreements, investors can earn rewards for providing liquidity, while the contract benefits from a flexible payment processing solution that supports income receipt, supplier payments, and contract completion.</p>
-<h2 id="tests"><a class="header" href="#tests">Tests</a></h2>
-<p><a href="docs/test-results.html">ERC4626 and project tests</a></p>
-<h2 id="built-with-foundry"><a class="header" href="#built-with-foundry">Built with Foundry</a></h2>
-<p><strong>Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.</strong></p>
-<p>Foundry consists of:</p>
+<p>By combining the features of the GreenBond and project finance agreements, investors can earn rewards for providing liquidity, while the contract benefits from a flexible payment processing solution that supports income receipt, project payments, and project completion.</p>
+<h2 id="project-finance-operations"><a class="header" href="#project-finance-operations">Project Finance Operations</a></h2>
 <ul>
-<li><strong>Forge</strong>: Ethereum testing framework (like Truffle, Hardhat and DappTools).</li>
-<li><strong>Cast</strong>: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.</li>
-<li><strong>Anvil</strong>: Local Ethereum node, akin to Ganache, Hardhat Network.</li>
-<li><strong>Chisel</strong>: Fast, utilitarian, and verbose solidity REPL.</li>
+<li><a href="PROJECT_FINANCE.html">Project Finance</a></li>
+<li><a href="XSTRUCTURE.html">XStructure</a></li>
 </ul>
-<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
-<p>https://book.getfoundry.sh/</p>
-<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
-<h3 id="build"><a class="header" href="#build">Build</a></h3>
-<pre><code class="language-shell">$ forge build
-</code></pre>
-<h3 id="test"><a class="header" href="#test">Test</a></h3>
-<pre><code class="language-shell">$ forge test --fork-url https://arb1.arbitrum.io/rpc -vvv
-</code></pre>
-<h3 id="format"><a class="header" href="#format">Format</a></h3>
-<pre><code class="language-shell">$ forge fmt
-</code></pre>
-<h3 id="gas-snapshots"><a class="header" href="#gas-snapshots">Gas Snapshots</a></h3>
-<pre><code class="language-shell">$ forge snapshot
-</code></pre>
-<h3 id="anvil"><a class="header" href="#anvil">Anvil</a></h3>
-<pre><code class="language-shell">$ anvil
-</code></pre>
-<h3 id="deploy"><a class="header" href="#deploy">Deploy</a></h3>
-<pre><code class="language-shell">$ forge script script/Deploy.s.sol:DeployScript --rpc-url &lt;your_rpc_url&gt; --private-key &lt;your_private_key&gt;
-</code></pre>
-<h3 id="cast"><a class="header" href="#cast">Cast</a></h3>
-<pre><code class="language-shell">$ cast &lt;subcommand&gt;
-</code></pre>
-<h3 id="help"><a class="header" href="#help">Help</a></h3>
-<pre><code class="language-shell">$ forge --help
-$ anvil --help
-$ cast --help
-</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="renewable-energy-project-finance-a-comprehensive-guide"><a class="header" href="#renewable-energy-project-finance-a-comprehensive-guide">Renewable Energy Project Finance: A Comprehensive Guide</a></h1>
+<p>Renewable energy is a key component of the global effort to combat climate change and reduce reliance on fossil fuels. However, developing and implementing renewable energy projects requires substantial investment and careful financial planning. In this article, we will delve into the intricacies of renewable energy project finance, exploring the key concepts and strategies that drive the funding of these sustainable initiatives.</p>
+<h2 id="introduction-to-renewable-energy-project-finance"><a class="header" href="#introduction-to-renewable-energy-project-finance">Introduction to Renewable Energy Project Finance</a></h2>
+<p>Renewable energy project finance is the process of securing the necessary capital to plan, construct, and operate renewable energy projects. These projects can encompass a wide range of technologies, including solar, wind, hydroelectric, geothermal, and biomass energy. The success of these projects relies on a well-structured financial plan, which must take into account several critical factors.</p>
+<h2 id="key-elements-of-renewable-energy-project-finance"><a class="header" href="#key-elements-of-renewable-energy-project-finance">Key Elements of Renewable Energy Project Finance</a></h2>
+<h3 id="1-project-structuring"><a class="header" href="#1-project-structuring">1. Project Structuring</a></h3>
+<p>The first step in financing a renewable energy project is to establish a clear project structure. This involves defining the technology to be used, project location, size, and the expected energy output. Project structuring also includes setting up special purpose vehicles (SPVs) or legal entities dedicated to the project. SPVs are crucial for ring-fencing the project from other corporate assets and liabilities.</p>
+<h3 id="2-financing-sources"><a class="header" href="#2-financing-sources">2. Financing Sources</a></h3>
+<p>There are various sources of financing for renewable energy projects, including:</p>
+<ul>
+<li>
+<p><strong>Debt Financing</strong>: This involves securing loans or bonds to fund the project. Debt financing can come from banks, financial institutions, or bonds issued in the capital market.</p>
+</li>
+<li>
+<p><strong>Equity Financing</strong>: Investors provide equity capital in exchange for ownership stakes in the project. These investors can include private equity firms, venture capitalists, or public shareholders.</p>
+</li>
+<li>
+<p><strong>Grants and Subsidies</strong>: Government incentives and grants can significantly reduce the financial burden of renewable energy projects.</p>
+</li>
+<li>
+<p><strong>Tax Equity Financing</strong>: Tax benefits are often used to attract investors by offering tax credits and deductions associated with renewable energy projects.</p>
+</li>
+</ul>
+<h3 id="3-power-purchase-agreements-ppas"><a class="header" href="#3-power-purchase-agreements-ppas">3. Power Purchase Agreements (PPAs)</a></h3>
+<p>PPAs are long-term contracts that secure a buyer for the energy generated by the project. These agreements are crucial for assuring revenue streams and attracting investors. PPAs can be structured as fixed-price, escalating price, or indexed to inflation.</p>
+<h3 id="4-risk-mitigation"><a class="header" href="#4-risk-mitigation">4. Risk Mitigation</a></h3>
+<p>Renewable energy projects involve various risks, including technology risk, regulatory risk, and market risk. Effective risk management strategies, such as insurance, hedges, and contractual agreements, are essential to provide confidence to investors and lenders.</p>
+<h3 id="5-financial-models"><a class="header" href="#5-financial-models">5. Financial Models</a></h3>
+<p>Developing comprehensive financial models is crucial to assess the economic viability of the project. These models include cash flow projections, sensitivity analysis, and scenario planning to account for variables like energy prices, operating costs, and project timelines.</p>
+<h2 id="renewable-energy-project-finance-process"><a class="header" href="#renewable-energy-project-finance-process">Renewable Energy Project Finance Process</a></h2>
+<p>The process of financing a renewable energy project typically follows these steps:</p>
+<ol>
+<li>
+<p><strong>Project Origination</strong>: Identifying suitable project locations and technologies.</p>
+</li>
+<li>
+<p><strong>Pre-Feasibility Study</strong>: Conducting initial studies to determine the project's economic feasibility.</p>
+</li>
+<li>
+<p><strong>Project Structuring</strong>: Creating a legal entity, securing permits, and designing the project.</p>
+</li>
+<li>
+<p><strong>Financial Planning</strong>: Determining the optimal mix of financing sources and creating financial models.</p>
+</li>
+<li>
+<p><strong>Fundraising</strong>: Attracting investors and securing loans or grants.</p>
+</li>
+<li>
+<p><strong>Construction and Commissioning</strong>: Building the project according to the design.</p>
+</li>
+<li>
+<p><strong>Operations and Maintenance</strong>: Ensuring the project operates efficiently and profitably.</p>
+</li>
+<li>
+<p><strong>Monitoring and Reporting</strong>: Regularly evaluating project performance against financial models.</p>
+</li>
+<li>
+<p><strong>Exit Strategy</strong>: Determining when and how investors can exit the project with returns.</p>
+</li>
+</ol>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>Renewable energy project finance is a complex and multifaceted process that requires careful planning and a deep understanding of financial instruments, risks, and market dynamics. As the world continues to shift towards sustainable energy sources, the ability to secure the necessary financing for renewable projects becomes increasingly critical. By following the principles outlined in this article, project developers and investors can work together to drive the growth of renewable energy and combat climate change.</p>
+<p><em>Disclaimer: This article provides a high-level overview of renewable energy project finance. Specific projects may have unique characteristics and requirements. It is advisable to consult with financial experts and legal advisors for detailed guidance on your specific project.</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="xstructure---project-finance-operator-workflow"><a class="header" href="#xstructure---project-finance-operator-workflow">Xstructure - Project Finance Operator Workflow</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Xstructure is responsible for managing and operating the <code>GreenBondV2</code> contract, which serves as an ERC4626 Vault on Arbitrum for the GreenBond project. This technical workflow outlines the key roles and operations that Xstructure performs as a project finance operator for the GreenBond DeFi platform.</p>
+<h2 id="key-roles-and-operations"><a class="header" href="#key-roles-and-operations">Key Roles and Operations</a></h2>
+<h3 id="1-initial-setup"><a class="header" href="#1-initial-setup">1. Initial Setup</a></h3>
+<p>Xstructure's role as a project finance operator begins with the initial setup of the <code>GreenBondV2</code> contract. This setup involves deploying the contract and configuring various parameters, such as the lockup period, asset addresses, Aave pool, and encoder.</p>
+<h3 id="2-governance"><a class="header" href="#2-governance">2. Governance</a></h3>
+<p>As a project finance operator, Xstructure has governance control over the contract. This control includes the ability to make critical decisions and changes. Key governance-related operations include:</p>
+<ul>
+<li>
+<p><strong>Changing Lockup Period</strong>: Xstructure can modify the lockup period as needed to align with project requirements.</p>
+</li>
+<li>
+<p><strong>Adding and Removing Governance Addresses</strong>: Xstructure can add or remove addresses from the governance list to grant or revoke control over contract parameters.</p>
+</li>
+<li>
+<p><strong>Recovering Tokens</strong>: In cases where token recovery is necessary, Xstructure can initiate the transfer of tokens from the contract to a designated receiver.</p>
+</li>
+</ul>
+<h3 id="3-project-management"><a class="header" href="#3-project-management">3. Project Management</a></h3>
+<p>Xstructure plays a pivotal role in managing and supervising projects that interact with the GreenBond platform. Project management operations include:</p>
+<ul>
+<li>
+<p><strong>Registering Projects</strong>: Xstructure can register new projects by specifying project administrators and project names. This step initiates the project's interaction with the GreenBond platform.</p>
+</li>
+<li>
+<p><strong>Linking Project Agreements</strong>: Xstructure can link project agreements by associating project IDs with master agreements. This ensures that project-related agreements are stored securely on the blockchain.</p>
+</li>
+<li>
+<p><strong>Completing Projects</strong>: When a project has successfully repaid its deployed assets, Xstructure can mark the project as completed.</p>
+</li>
+<li>
+<p><strong>Paying Projects</strong>: Xstructure has the authority to pay projects by transferring assets to the project administrators. This action activates the project and increases the total assets supplied to that project.</p>
+</li>
+<li>
+<p><strong>Receiving Income</strong>: Xstructure handles the reception of income from projects. Income received is then distributed to the project's address, effectively repaying the assets.</p>
+</li>
+</ul>
+<h3 id="4-master-agreement-preparation"><a class="header" href="#4-master-agreement-preparation">4. Master Agreement Preparation</a></h3>
+<p>One of Xstructure's critical responsibilities as a project finance operator is to facilitate the creation and preparation of the master agreement for each project. The master agreement serves as a binding contract that formalizes the relationship between the project, the GreenBond platform, and the bondholders. It establishes the terms and conditions under which the project's assets and revenue rights are tied to the bond. Here's an overview of the master agreement preparation process:</p>
+<ul>
+<li>
+<p><strong>Project-Specific Terms</strong>: Xstructure collaborates with the project administrators to define project-specific terms within the master agreement. These terms may include the duration of the project, the asset lockup period, revenue-sharing arrangements, and any special conditions that pertain to the project.</p>
+</li>
+<li>
+<p><strong>Legal Compliance</strong>: Xstructure ensures that the master agreement complies with all relevant legal and regulatory requirements. This may involve consulting with legal experts to draft or review the agreement to ensure it adheres to local and international laws.</p>
+</li>
+<li>
+<p><strong>Asset Lockup Period</strong>: The master agreement explicitly outlines the asset lockup period, which may range from 3 to 6 months. During this period, the project's assets are locked, and revenue is accrued, further securing bondholders' investments.</p>
+</li>
+<li>
+<p><strong>Revenue Distribution</strong>: The master agreement defines how revenue generated by the project is distributed. This may include specifying the percentage of revenue allocated to bondholders, project expenses, and the project's administrators.</p>
+</li>
+<li>
+<p><strong>Rights and Obligations</strong>: The agreement outlines the rights and obligations of all parties involved, including the project administrators, GreenBond platform, and bondholders. It clearly defines the responsibilities and expectations of each party.</p>
+</li>
+<li>
+<p><strong>Performance Metrics</strong>: To ensure transparency and accountability, the master agreement may include performance metrics and reporting requirements. These metrics are used to track the project's progress and assess its financial health.</p>
+</li>
+<li>
+<p><strong>Dispute Resolution</strong>: In the event of disputes or disagreements, the master agreement outlines a clear dispute resolution process. This process helps in resolving issues and maintaining the integrity of the bond.</p>
+</li>
+<li>
+<p><strong>Amendments and Updates</strong>: The agreement may specify the process for making amendments or updates to the terms and conditions. This ensures that the agreement can adapt to changing circumstances or project developments.</p>
+</li>
+<li>
+<p><strong>Signing and Execution</strong>: Once the master agreement is drafted, it is reviewed and signed by all relevant parties, including project administrators, bondholders, and the GreenBond platform. The agreement becomes legally binding upon execution.</p>
+</li>
+</ul>
+<p>By meticulously preparing the master agreement, Xstructure helps establish a secure and transparent framework that ties the project's assets and revenue rights to the bond. This agreement ensures that all parties involved are aware of their rights and responsibilities, ultimately fostering trust and confidence in the GreenBond platform and its mission to support renewable energy initiatives.</p>
+<h2 id="conclusion-1"><a class="header" href="#conclusion-1">Conclusion</a></h2>
+<p>Xstructure plays a critical role in managing and operating the <code>GreenBondV2</code> contract as a project finance operator. Their responsibilities include governance, project management, and asset management, all of which are vital for the success and sustainability of the GreenBond DeFi platform. Through these operations, Xstructure contributes to the growth and stability of the DeFi green bond project, furthering its mission to support renewable energy initiatives.</p>
+<p><em>Disclaimer: The technical workflow presented here is a high-level overview of Xstructure's role and operations as a project finance operator for the GreenBond project. Actual workflows may vary depending on specific project requirements and contractual agreements.</em></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="contents"><a class="header" href="#contents">Contents</a></h1>
 <ul>
 <li><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li>
@@ -538,22 +639,6 @@ Time weighted asset lockup period of 3-6 months applies to enable the above.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

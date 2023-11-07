@@ -1,6 +1,6 @@
 [book]
 src = "src"
-title = ""
+title = "GreenBond Docs"
 
 [output.html]
 no-section-label = true
