@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - GreenBond Docs</title>
+        <title>Technical Overview - GreenBond Docs</title>
 
 
         <!-- Custom HTML head -->
@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html" class="active">Home</a></li><li class="chapter-item "><a href="TECH_OVERVIEW.html">Technical Overview</a></li><li class="chapter-item "><a href="PROJECT_FINANCE.html">Project Finance</a></li><li class="chapter-item "><a href="XSTRUCTURE.html">XStructure</a></li><li class="chapter-item "><a href="GOV.html">Green Governance</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li><li class="chapter-item "><a href="src/interfaces/IL2Pool.sol/interface.IL2Pool.html">IL2Pool</a></li></ol></li><li class="chapter-item "><a href="src/GreenBondV2.sol/contract.GreenBondV2.html">GreenBondV2</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item expanded "><a href="TECH_OVERVIEW.html" class="active">Technical Overview</a></li><li class="chapter-item "><a href="PROJECT_FINANCE.html">Project Finance</a></li><li class="chapter-item "><a href="XSTRUCTURE.html">XStructure</a></li><li class="chapter-item "><a href="GOV.html">Green Governance</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/IL2Encoder.sol/interface.IL2Encoder.html">IL2Encoder</a></li><li class="chapter-item "><a href="src/interfaces/IL2Pool.sol/interface.IL2Pool.html">IL2Pool</a></li></ol></li><li class="chapter-item "><a href="src/GreenBondV2.sol/contract.GreenBondV2.html">GreenBondV2</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -175,89 +175,57 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="-green-bond-v2-"><a class="header" href="#-green-bond-v2-">🌟 Green Bond V2 🌟</a></h1>
-<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
-<ol>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#getting-started">Getting Started</a>
+                        <h1 id="green-bond-v2-technical-overview"><a class="header" href="#green-bond-v2-technical-overview">Green Bond V2 Technical Overview</a></h1>
+<h3 id="green-bond-contract-on-arbitrum-erc4626-compatible"><a class="header" href="#green-bond-contract-on-arbitrum-erc4626-compatible">Green Bond Contract on Arbitrum (<a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/">ERC4626 compatible</a>)</a></h3>
+<h3 id="deployed-at-0xd24644ca8cb5d67e776291b37896bc3d557a47b8"><a class="header" href="#deployed-at-0xd24644ca8cb5d67e776291b37896bc3d557a47b8">Deployed at <a href="https://arbiscan.io/address/0xd24644ca8cb5d67e776291b37896bc3d557a47b8">0xD24644Ca8cB5D67E776291b37896Bc3D557A47B8</a></a></h3>
+<h2 id="greenbond-v2-summary"><a class="header" href="#greenbond-v2-summary">GreenBond V2 Summary</a></h2>
+<p>GreenBond V2 contract builds upon <a href="https://github.com/greenchaincapital/GreenBond">GreenBond</a> with the following features:</p>
 <ul>
-<li><a href="#connecting-to-the-dapp">Connecting to the Dapp</a></li>
+<li>Fully ERC4626 compatible</li>
+<li>Aave passive income instead of Curve
+<ul>
+<li>Simplified interfacing (more robust and secure)</li>
+<li>Better rate of return (currently ~10% APR for Aave as opposed to ~6% for Curve)</li>
+<li>Automatic rewards as opposed to claiming processes</li>
 </ul>
 </li>
-<li><a href="#main-actions">Main Actions</a>
-<ul>
-<li><a href="#1-deposit-usdt-for-gbond">1. Deposit USDT for gBOND</a></li>
-<li><a href="#2-redeem-gbond-for-usdt">2. Redeem gBOND for USDT</a></li>
 </ul>
+<p>Overrall design to provide stable returns for renewable energy project financing, in the form of a stablecoin (USDT) bond. It enforces a minimum lock-up period (3-6 months) for deposited assets, in order to establish new projects' active income. Passive income is earned through Aave lending.</p>
+<p>Green energy projects are registered for asset deployment. Master contract agreements are publically linked for transparency and accountability of operations. Income is received from these projects to pay dividends to investors. </p>
+<h3 id="interaction-between-greenbond-and-projects"><a class="header" href="#interaction-between-greenbond-and-projects">Interaction Between GreenBond and Projects:</a></h3>
+<ul>
+<li>
+<p>Reward Accumulation: Users deposit stablecoins (USDT) into the GreenBond contract to earn rewards over time. These rewards are automatically accumulated, based on both passive income from Aave lending and active income from active projects.</p>
 </li>
-<li><a href="#stats-page">Stats Page</a></li>
-<li><a href="#external-links">External Links</a>
-<ul>
-<li><a href="#bridge-assets-to-arbitrum">Bridge Assets to Arbitrum</a></li>
-<li><a href="#swap-assets-on-arbitrum">Swap Assets on Arbitrum</a></li>
-</ul>
+<li>
+<p>Income Receipt: The Projects generate income for the investors either in a fixed payment agreement or through re-sale of the project.</p>
 </li>
-<li><a href="#further-reading">Further reading</a></li>
-<li><a href="#contact-support">Contact Support</a></li>
-</ol>
-<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
-<p>Welcome to the Green Bond V2 - your gateway to decentralized finance green bonds on the Arbitrum network. This user documentation will guide you through the key features and actions available on our platform.</p>
-<h2 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h2>
-<h3 id="connecting-to-the-dapp"><a class="header" href="#connecting-to-the-dapp">Connecting to the Dapp</a></h3>
-<p>To start using GreenBondV2, follow these steps:</p>
-<ol>
-<li>Ensure that you have an Ethereum wallet with funds.</li>
-<li>Visit <a href="https://www.greenchain.capital">greenchain.capital</a> in your preferred web browser.</li>
-<li>Connect your wallet to the dapp by clicking on the &quot;Connect Wallet&quot; button and selecting your wallet provider.</li>
-</ol>
-<h2 id="main-actions"><a class="header" href="#main-actions">Main Actions</a></h2>
-<h3 id="1-deposit-usdt-for-gbond"><a class="header" href="#1-deposit-usdt-for-gbond">1. Deposit USDT for gBOND</a></h3>
-<p>To deposit USDT and acquire gBOND, follow these steps:</p>
-<p><img src="image.png" alt="Deposit USDT" /></p>
-<ol>
-<li>Navigate to the &quot;Deposit&quot; section on the dapp.</li>
-<li>Enter the amount of USDT you want to deposit.</li>
-<li>Confirm the transaction on your wallet.</li>
-<li>Once the transaction is confirmed, you will receive the equivalent amount of gBOND.</li>
-</ol>
-<h3 id="2-redeem-gbond-for-usdt"><a class="header" href="#2-redeem-gbond-for-usdt">2. Redeem gBOND for USDT</a></h3>
-<p>To redeem gBOND for USDT, follow these steps:</p>
-<p><img src="image-1.png" alt="Redeem gBOND" /></p>
-<ol>
-<li>Go to the &quot;Redeem&quot; section on the dapp.</li>
-<li>Enter the amount of gBOND you want to redeem.</li>
-<li>Confirm the transaction on your wallet.</li>
-<li>After the transaction is confirmed, you will receive the corresponding amount of USDT.</li>
-</ol>
-<h2 id="stats-page"><a class="header" href="#stats-page">Stats Page</a></h2>
-<p>Explore the &quot;Stats&quot; page to track bond investment and rewards:</p>
-<ul>
-<li>Total Amount Invested: View the total USDT deposited.</li>
-<li>Rewards Earned: Monitor the rewards earned from investments.</li>
+<li>
+<p>Supplier Payment: The GreenBond contract, under governance control, can pay the registered project admin. Governance initiates the payment by calling the payProject function, specifying the project details.</p>
+</li>
+<li>
+<p>Activation and Completion: Each project can be activated by governance, marking the start of the payment process. Once the term of the agreement is over, the company can complete the project by calling the completeProject function.</p>
+</li>
+<li>
+<p>Governance Control: The GreenBond contract is under governance control, allowing designated addresses to manage contract parameters, such as the fixed interest rate, lock-up period, and governance address.</p>
+</li>
 </ul>
-<h2 id="external-links"><a class="header" href="#external-links">External Links</a></h2>
-<h3 id="bridge-assets-to-arbitrum-"><a class="header" href="#bridge-assets-to-arbitrum-">Bridge Assets to Arbitrum 🌉</a></h3>
-<p>Use the following link to bridge assets to Arbitrum:</p>
-<p><a href="https://bridge.arbitrum.io/">Arbitrum Bridge</a></p>
-<h3 id="swap-assets-on-arbitrum-"><a class="header" href="#swap-assets-on-arbitrum-">Swap Assets on Arbitrum 🔄</a></h3>
-<p>For asset swapping on Arbitrum, use the following link:</p>
-<p><a href="https://app.balancer.fi/#/arbitrum/swap">Swap assets on Arbitrum</a></p>
-<h2 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h2>
+<p>By combining the features of the GreenBond and project finance agreements, investors can earn rewards for providing liquidity, while the contract benefits from a flexible payment processing solution that supports income receipt, project payments, and project completion.</p>
+<h2 id="project-finance-operations"><a class="header" href="#project-finance-operations">Project Finance Operations</a></h2>
 <ul>
-<li><a href="TECH_OVERVIEW.html">Technical Overview</a></li>
 <li><a href="PROJECT_FINANCE.html">Project Finance</a></li>
 <li><a href="XSTRUCTURE.html">XStructure</a></li>
-<li><a href="GOV.html">Green Governance</a></li>
 </ul>
-<h2 id="contact-support-"><a class="header" href="#contact-support-">Contact Support 🤔</a></h2>
-<p>For further assistance, reach out to our support team at [info@greenchain.capital](mailto: info@greenchain.capital).</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="TECH_OVERVIEW.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="PROJECT_FINANCE.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -267,8 +235,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="TECH_OVERVIEW.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="PROJECT_FINANCE.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
