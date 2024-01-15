@@ -51,7 +51,11 @@ contract ERC4626Test is Test {
     bool internal _vaultMayBeEmpty;
     bool internal _unlimitedAmount;
 
+    string RPC = "https://arb1.arbitrum.io/rpc";
+    uint256 FORK_ID;
+
     function setUp() public {
+        FORK_ID = vm.createSelectFork(RPC);
         bond = new GreenBondV2();
         gov = tx.origin;
         _underlying_ = address(bond.asset());

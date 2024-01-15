@@ -18,6 +18,8 @@ interface IL2Pool {
      */
     function supply(bytes32 args) external;
 
+    function supply(address asset, uint256 amount, address onBehalfOf, uint16 referralCode) external;
+
     /**
      * @notice Calldata efficient wrapper of the supplyWithPermit function on behalf of the caller
      * @param args Arguments for the supply function packed in one bytes32
@@ -42,4 +44,6 @@ interface IL2Pool {
      * @return The final amount withdrawn
      */
     function withdraw(bytes32 args) external returns (uint256);
+
+    function withdraw(address asset, uint256 amount, address to) external returns (uint256);
 }

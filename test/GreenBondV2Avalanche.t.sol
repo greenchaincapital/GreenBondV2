@@ -3,15 +3,15 @@ pragma solidity ^0.8.17;
 
 import "forge-std/Test.sol";
 import { ERC20 } from "solmate/tokens/ERC20.sol";
-import { GreenBondV2 } from "src/GreenBondV2.sol";
+import { GreenBondV2 } from "src/GreenBondV2Avalanche.sol";
 
-contract GreenBondV2Test is Test {
+contract GreenBondV2AvalancheTest is Test {
     using stdStorage for StdStorage;
 
     GreenBondV2 public bond;
     address public gov;
 
-    string RPC = "https://arb1.arbitrum.io/rpc";
+    string RPC = "https://api.avax.network/ext/bc/C/rpc";
     uint256 FORK_ID;
 
     function setUp() public {

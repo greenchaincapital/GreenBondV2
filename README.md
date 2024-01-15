@@ -1,8 +1,10 @@
 # Green Bond V2 ![Foundry](https://github.com/greenchaincapital/GreenBondV2/actions/workflows/test.yml/badge.svg?branch=main)
 
-### Green Bond Contract on Arbitrum ([ERC4626 compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/))
+### Green Bond Contract ([ERC4626 compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/))
 
-### Deployed at [0xD24644Ca8cB5D67E776291b37896Bc3D557A47B8](https://arbiscan.io/address/0xd24644ca8cb5d67e776291b37896bc3d557a47b8)
+### Avalanche Deployment at [0x53fACeCc391021a69Ba79351007079536AA64C6d](https://snowtrace.io/address/0x53fACeCc391021a69Ba79351007079536AA64C6d)
+
+### Arbitrum Deployment at [0xD24644Ca8cB5D67E776291b37896Bc3D557A47B8](https://arbiscan.io/address/0xd24644ca8cb5d67e776291b37896bc3d557a47b8)
 
 ## GreenBond V2 Summary
 
